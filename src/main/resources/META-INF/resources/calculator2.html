@@ -75,6 +75,20 @@ $http({
            $scope.responseMsgKogito=response.data;
     });
     }
+
+    $scope.checkFuncSandbox = function() {
+
+$http({
+        url: $scope.sandboxEnd+'/Loan%20PreQualification',
+        method: "POST",
+        data: "{\"Credit Score\":"+$scope.creditScore+",\"Down payment\":"+$scope.downPayment+",\"Loan rate pct\":"+$scope.loanRate
+        +",\"Monthly income\":"+$scope.monthlyIncome+",\"Purchase price\":"+$scope.purchasePrice+"}"
+    })
+    .then(function(response) {
+           $scope.responseMsgKieSandbox=response.data;
+    });
+    }
+
 });
 
   
@@ -184,6 +198,9 @@ $http({
     <div class="control-label"><strong>Purchase Price</strong></div>
     <input class="col-lg-4" name="item" ng-model="purchasePrice" type="text" required>
     <hr/>
+    <div class="control-label"><strong>Sandbox Endpoint</strong></div>
+    <input class="col-lg-4" name="item" ng-model="sandboxEnd" type="text" required>
+    <hr/>
     <button id="rejectbutton"  type="button" class="btn btn-primary" ng-click="checkFunc();">Check Qualification</button>
 <hr/>
     <table class="table table-striped table-bordered table-hover" id="table1" ng-show="responseMsg != null">
@@ -241,6 +258,27 @@ $http({
 
         </tr>
     </table>
+
+    
+    <button id="rejectbutton"  type="button" class="btn btn-primary" ng-click="checkFuncSandbox();">Check Qualification Sandbox</button>
+<hr/>
+    <table class="table table-striped table-bordered table-hover" id="table1" ng-show="responseMsgKieSandbox != null">
+        <thead>
+        <tr>
+            <th>Qualification</th>
+            <th>Affordability</th>
+            <th>Debt to Income Ratio (DTI)</th>
+
+
+        </tr>
+        </thead>
+        <tr>
+            <td>{{responseMsgKieSandbox["Loan PreQualification"]}}</td>
+            <td>{{responseMsgKieSandbox["Affordability category"]}}</td>
+            <td>{{responseMsgKieSandbox["DTI pct"]}}</td>
+
+        </tr>
+    </table>    
 
 </div>
 
