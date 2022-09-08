@@ -38,6 +38,7 @@ public class LoanCalculatorResource {
                     mapVal.get("downPayment")+"," +
                     "\"Loan rate pct\":"+mapVal.get("loanRate")+"," +
                     "\"Monthly income\":"+mapVal.get("monthlyIncome")+",\"Purchase price\":"+mapVal.get("purchasePrice")+"}}";
+            Log.info("The request is :" + dmnReq);
 
              String response = onboardingService.checkQual(dmnReq);
 
